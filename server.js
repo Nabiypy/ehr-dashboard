@@ -27,23 +27,23 @@ app.use(morgan('dev'));
 app.use(passport.initialize());
 
 hookJWTStrategy(passport);
-// app.all('*',function (req,res,next){
-//     console.log(req.header("Authorization"));
-//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,Authorization ,Accept');
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     res.setHeader('Access-Control-Allow-Credentials',true);
-//     res.setHeader('Access-Control-Expose-Headers','Authorization');
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+app.all('*',function (req,res,next){
+    console.log(req.header("Authorization"));
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,Authorization ,Accept');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials',true);
+    res.setHeader('Access-Control-Expose-Headers','Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
 
-//     console.log(req.header("Authorization"));
-//     next();
-// });
+    console.log(req.header("Authorization"));
+    next();
+});
 // Set the static files location.
 // Serve static files
 // Set the static files location.
 // app.use(express.static(__dirname + '/public'));
-app.use(express.static(path.join(__dirname, '/angular')));
+app.use(express.static(path.join(__dirname, '/client')));
 app.use('/api', require('./server/routes/api')(passport)); // Bundle API routes.
 
 // Catch all route.
